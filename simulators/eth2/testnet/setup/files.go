@@ -26,6 +26,7 @@ func Eth1Bundle(genesis *core.Genesis) (hivesim.StartOption, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to serialize genesis state: %v", err)
 	}
+	fmt.Printf("Genesis:\n%v", out)
 	return hivesim.WithDynamicFile("genesis.json", bytesSource(out)), nil
 }
 
@@ -39,6 +40,7 @@ func StateBundle(state common.BeaconState) (hivesim.StartOption, error) {
 
 func ConsensusConfigsBundle(spec *common.Spec, genesis *core.Genesis, valCount uint64) (hivesim.StartOption, error) {
 	config, err := yaml.Marshal(spec.Config)
+	fmt.Printf("Beacon config:\n%v", config)
 	if err != nil {
 		return nil, err
 	}
